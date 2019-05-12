@@ -67,7 +67,7 @@ def extract_all_words_from_list_names(names_list):
     """
     word_list = []
     for name in names_list:
-        word_list = word_list + name.split("_")
+        word_list += name.split("_")
     return word_list
 
 
@@ -94,7 +94,7 @@ def count_top_words_in_path(project_path, excludet_dir_names={}, limit_words=20)
     trees = get_trees(project_path, excludet_dir_names)
     path_words =[]
     for tree in trees:
-        path_words = path_words + get_all_names(tree)
+        path_words += get_all_names(tree)
     print("Found {words} words, unique {uniq_words}".format(words=len(path_words), uniq_words=len(set(path_words))))
     return collections.Counter(extract_all_words_from_list_names(path_words)).most_common(limit_words)
 
@@ -110,7 +110,7 @@ def count_top_verbs_in_function_names(project_path, excludet_dir_names={}, limit
     trees = get_trees(project_path, excludet_dir_names)
     function_names_in_path = []
     for tree in trees:
-        function_names_in_path = function_names_in_path + get_all_function_names(tree)
+        function_names_in_path += get_all_function_names(tree)
     print("Found {functions} functions".format(functions=len(function_names_in_path)))
     verbs = [word for word in extract_all_words_from_list_names(function_names_in_path) if is_verb(word)]
     return collections.Counter(verbs).most_common(limit_words)
@@ -124,13 +124,8 @@ def most_common_word(top_function_result):
 Path = '/Users/admin/PycharmProjects/code_parser/'
 exclude = {'venv', '.git', '.idea'}
 
-# for tree in get_trees(Path, exclude):
-#     print(len(get_all_names(tree)), len(extract_all_words_from_list_names(get_all_names(tree))))
-
-# print(count_top_verbs_in_function_names(Path, exclude))
-# # print(count_top_words_in_path(Path,exclude))
-most_common_word(count_top_verbs_in_function_names(Path))
-most_common_word(count_top_words_in_path(Path))
+most_common_word(count_top_verbs_in_function_names(Path, exclude))
+most_common_word(count_top_words_in_path(Path, exclude))
 
 
 
