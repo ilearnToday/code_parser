@@ -4,16 +4,18 @@ import ast
 import nltk
 
 
-def collect_files_path(project_path, exclude_dir_names={}):
+def collect_files_path(project_path, excludet_dir_names=None):
     """
     Collect all .py files path
     :param project_path: str
     :param exclude_dir_names: set
     :return: list
     """
+    if excludet_dir_names is None:
+        excludet_dir_names = {}
     pyfiles_path =[]
     for dirpath, dirrectories, filenames in os.walk(project_path, topdown=True):
-        dirrectories[:] = [dir for dir in dirrectories if dir not in exclude_dir_names]
+        dirrectories[:] = [dir for dir in dirrectories if dir not in excludet_dir_names]
         for filename in filenames:
             if filename.endswith(".py"):
                 pyfiles_path.append(os.path.join(dirpath, filename))
