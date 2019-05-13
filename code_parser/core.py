@@ -20,15 +20,17 @@ def collect_files_path(project_path, exclude_dir_names={}):
     return pyfiles_path
 
 
-def get_trees(project_path, exclude_dir_names={}):
+def get_trees(project_path, excludet_dir_names=None):
     """
     Parse all .py files in project into ast trees
     :param project_path: str
     :param exclude_dir_names: set
     :return: list
     """
+    if excludet_dir_names is None:
+        excludet_dir_names = {}
     trees = []
-    pyfiles_path = collect_files_path(project_path, exclude_dir_names)
+    pyfiles_path = collect_files_path(project_path, excludet_dir_names)
     for filename in pyfiles_path:
         with open(filename, 'r', encoding='utf-8') as attempt_handler:
             file_content = attempt_handler.read()
@@ -83,7 +85,7 @@ def is_verb(word):
     return pos_info[0][1] == 'VB'
 
 
-def count_top_words_in_path(project_path, excludet_dir_names={}, limit_words=20):
+def count_top_words_in_path(project_path, excludet_dir_names=None, limit_words=20):
     """
     Counting all words that uses in project
     :param project_path: str
@@ -91,6 +93,8 @@ def count_top_words_in_path(project_path, excludet_dir_names={}, limit_words=20)
     :param limit_words: int
     :return: list
     """
+    if excludet_dir_names is None:
+        excludet_dir_names = {}
     trees = get_trees(project_path, excludet_dir_names)
     path_words =[]
     for tree in trees:
@@ -99,7 +103,7 @@ def count_top_words_in_path(project_path, excludet_dir_names={}, limit_words=20)
     return collections.Counter(extract_all_words_from_list_names(path_words)).most_common(limit_words)
 
 
-def count_top_verbs_in_function_names(project_path, excludet_dir_names={}, limit_words=20):
+def count_top_verbs_in_function_names(project_path, excludet_dir_names=None, limit_words=20):
     """
     Counting all verbs from function names that uses in project
     :param project_path: str
@@ -107,6 +111,8 @@ def count_top_verbs_in_function_names(project_path, excludet_dir_names={}, limit
     :param limit_words: int
     :return: list
     """
+    if excludet_dir_names is None:
+        excludet_dir_names = {}
     trees = get_trees(project_path, excludet_dir_names)
     function_names_in_path = []
     for tree in trees:
@@ -117,6 +123,11 @@ def count_top_verbs_in_function_names(project_path, excludet_dir_names={}, limit
 
 
 def most_common_word(top_function_result):
+    """
+    ?
+    :param top_function_result: list
+    :return: print
+    """
     return print("Most common is {word}, used {times} times".format(word=top_function_result[0][0], times=top_function_result[0][1]))
 
 
