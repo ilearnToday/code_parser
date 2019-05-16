@@ -8,7 +8,7 @@ def collect_files_path(project_path, excludet_dir_names=None):
     """
     Collect all .py files path
     :param project_path: str
-    :param exclude_dir_names: set
+    :param excludet_dir_names: set
     :return: list
     """
     if excludet_dir_names is None:
@@ -26,7 +26,7 @@ def get_trees(project_path, excludet_dir_names=None):
     """
     Parse all .py files in project into ast trees
     :param project_path: str
-    :param exclude_dir_names: set
+    :param excludet_dir_names: set
     :return: list
     """
     if excludet_dir_names is None:
@@ -132,13 +132,6 @@ def most_common_word(top_function_result):
     """
     return print("Most common is {word}, used {times} times".format(word=top_function_result[0][0], times=top_function_result[0][1]))
 
-
-
-Path = '/Users/admin/PycharmProjects/code_parser/'
-exclude = {'venv', '.git', '.idea'}
-
-most_common_word(count_top_verbs_in_function_names(Path, exclude))
-most_common_word(count_top_words_in_path(Path, exclude))
 
 
 
