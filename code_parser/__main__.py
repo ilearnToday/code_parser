@@ -13,7 +13,6 @@ def parse_args():
 
 
 def main():
-    """EXCLUDET DIRS"""
     args = parse_args()
     most_common_word(count_top_verbs_in_function_names(args.path, set(args.exclude.split(','))))
     most_common_word(count_top_words_in_path(args.path, set(args.exclude.split(','))))
