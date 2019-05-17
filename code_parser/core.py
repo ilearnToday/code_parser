@@ -125,13 +125,9 @@ def count_top_verbs_in_function_names(project_path, excludet_dir_names=None, lim
 
 
 def most_common_word(top_function_result):
-    """
-    ?
-    :param top_function_result: list
-    :return: print
-    """
-    return print("Most common is {word}, used {times} times".format(word=top_function_result[0][0], times=top_function_result[0][1]))
-
+    if top_function_result:
+        return print("Most common is {word}, used {times} times".format(word=top_function_result[0][0], times=top_function_result[0][1]))
+    return print("Result is empty")
 
 
 
