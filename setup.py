@@ -5,7 +5,7 @@ with open("README.MD", "r") as fh:
 
 setuptools.setup(
     name = "code_parser",
-    version="1.0",
+    version="0.0.1",
     author="Viatcheslav ilearnToday",
     author_email="goodeitime@gmail.com",
     long_description=long_description,
